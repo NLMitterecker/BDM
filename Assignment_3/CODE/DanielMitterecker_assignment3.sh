@@ -45,12 +45,13 @@ function check_output_path {
 }
 
 function main {
+	# clear the screen
 	reset
 	for chromosome_number in $chromosome_list; do
 		add_chr $chromosome_number &
 	done
 	wait
-	echo ""; echo "Chromosome numbers added."; echo "Catenating per chromosome files."
+	printf "\nChromosome numbers added.\nCatenating per chromosome files.\n"
 	check_output_path
 	cat $data_output_path/$base_filename*_chradded.txt \
 		> $data_output_path/$base_filename"added$datafile_extension"
