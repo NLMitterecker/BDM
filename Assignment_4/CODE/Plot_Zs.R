@@ -11,6 +11,6 @@ if (length(args) < 1) {
 	outputFile <- paste('Zplot', inputFilename, sep='_')
 	jpeg(paste(dataOutputPath, outputFile, sep='/'))
 	plot(data$Z1, data$Z2, main='Daniel Mittereckers Zplot', xlab='Z_beta_se', ylab='Z_pval', col='blue')
-	dev.off()
+	garbage <- dev.off()
 }
 

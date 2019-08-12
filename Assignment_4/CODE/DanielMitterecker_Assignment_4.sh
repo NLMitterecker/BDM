@@ -26,5 +26,8 @@ else
 	output_data=$(remove_dups $data_input_path/$filename)
 	$r_add_z_script $output_data
 	$r_plot_script $data_output_path/"Z1_Z2_Nodups_$filename"
+	awk 'BEGIN { OFS="\t"} { if (NR == 1) print $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, "Z_outlier"; else if ( $10/$11 > 1.1 || $11/$10 > 1.1) print $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, "1"; else print $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, "0"}' $data_output_path/"Z1_Z2_Nodups_$filename" > $data_output_path/tmp_file
+	awk '{ if (NR == 1 || $12 == 0) print}' $data_output_path/tmp_file > $data_output_path/Cleaned_Z1_Z2_Nodups_$filename
+	$r_plot_script $data_output_path/Cleaned_Z1_Z2_Nodups_$filename
 fi
 
