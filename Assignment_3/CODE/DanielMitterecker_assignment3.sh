@@ -30,7 +30,7 @@ function check_datafile {
 	fi
 	echo "Datafile in $chromosome_filename OK."
 }
-
+# TODO merge next to functions to one; export awk script to external file
 function new_data_header {
 	data_file=$1
 	new_col_name=$chromosome_column_header
