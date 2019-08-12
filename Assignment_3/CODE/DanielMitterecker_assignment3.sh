@@ -23,10 +23,10 @@ function add_chr {
 function check_datafile {
 	chromosome_filename=$1
 	if [ ! -f "$chromosome_filename" ]; then
-		echo "Datafile $chromosome_filename does not exist. Exiting!"
-       		exit
+		echo -e "\e[31mWARNING\e[39m: Datafile $chromosome_filename does not exist."
+	else
+		echo -e "Datafile in $chromosome_filename \e[32mOK\e[39m."
 	fi
-	echo "Datafile in $chromosome_filename OK."
 }
 
 function new_data_file {
@@ -34,7 +34,7 @@ function new_data_file {
 	data_value=$2
 	awk -v columnData=$data_value -v columnName=$chromosome_column_header \
 	'BEGIN {OFS="\t"} { if ( NR == 1 ) print $1, columnName, $2, $3, $4, $5, $6, $7, $8;\
-		 else print $1, columnData, $2, $3, $4, $5, $6, $7, $8 }'\
+		else print $1, columnData, $2, $3, $4, $5, $6, $7, $8 }'\
 		$data_file
 }
 
@@ -45,12 +45,12 @@ function check_output_path {
 }
 
 function main {
+	reset
 	for chromosome_number in $chromosome_list; do
 		add_chr $chromosome_number &
 	done
 	wait
-	echo "Chromosome numbers added."
-	echo "Catenating per chromosome files."
+	echo ""; echo "Chromosome numbers added."; echo "Catenating per chromosome files."
 	check_output_path
 	cat $data_output_path/$base_filename*_chradded.txt \
 		> $data_output_path/$base_filename"added$datafile_extension"
