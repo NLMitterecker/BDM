@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Hello comments
 chromosome_column_header="CHR"
 data_input_path="../INPUT"
 data_output_path="../OUTPUT"
@@ -17,10 +16,8 @@ function add_chr {
 	check_datafile $chromosome_filename 
 	check_output_path
 	echo "Adding chromosome number to $chromosome_filename"
-	echo "$(new_data_header $chromosome_filename)" \
+        echo "$(new_data_file $chromosome_filename $chromosome_number)" \
 		> $data_output_path/$base_filename$chromosome_number"_chradded$datafile_extension"
-	echo "$(new_data_columns $chromosome_filename $chromosome_number)" \
-		>> $data_output_path/$base_filename$chromosome_number"_chradded$datafile_extension"
 }
 
 function check_datafile {
@@ -31,21 +28,14 @@ function check_datafile {
 	fi
 	echo "Datafile in $chromosome_filename OK."
 }
-# TODO merge next to functions to one; export awk script to external file
-function new_data_header {
-	data_file=$1
-	new_col_name=$chromosome_column_header
-	awk -v newColName=$new_col_name \
-	'{ if ( NR == 1 ) print $1, newColName, $2, $3, $4, $5, $6, $7, $8 }' \
-	$data_file
-}
 
-function new_data_columns {
+function new_data_file {
 	data_file=$1
 	data_value=$2
-	awk -v columnData=$data_value \
-	'{ if ( NR > 1 ) print $1, columnData, $2, $3, $4, $5, $6, $7, $8 }'\
-	$data_file
+	awk -v columnData=$data_value -v columnName=$chromosome_column_header \
+	'BEGIN {OFS="\t"} { if ( NR == 1 ) print $1, columnName, $2, $3, $4, $5, $6, $7, $8;\
+		 else print $1, columnData, $2, $3, $4, $5, $6, $7, $8 }'\
+		$data_file
 }
 
 function check_output_path {
@@ -64,7 +54,8 @@ function main {
 	check_output_path
 	cat $data_output_path/$base_filename*_chradded.txt \
 		> $data_output_path/$base_filename"added$datafile_extension"
-	sed -i '1!{/^Marker/d}' $data_output_path/$base_filename"added$datafile_extension"
+	sed -i '1!{/^Marker/d}' \
+		$data_output_path/$base_filename"added$datafile_extension"
 	echo "Scipt over"
 }
 
