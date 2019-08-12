@@ -15,6 +15,7 @@ function add_chr {
 	fi
 	chromosome_filename=$data_input_path/$base_filename$chromosome_number$datafile_extension
 	check_datafile $chromosome_filename 
+	check_output_path
 	echo "Adding chromosome number to $chromosome_filename"
 	echo "$(new_data_header $chromosome_filename)" \
 		> $data_output_path/$base_filename$chromosome_number"_chradded$datafile_extension"
@@ -47,6 +48,12 @@ function new_data_columns {
 	$data_file
 }
 
+function check_output_path {
+	if [ ! -d $data_output_path ]; then
+		mkdir -p $data_output_path
+	fi
+}
+
 function main {
 	for chromosome_number in $chromosome_list; do
 		add_chr $chromosome_number &
@@ -54,6 +61,7 @@ function main {
 	wait
 	echo "Chromosome numbers added."
 	echo "Catenating per chromosome files."
+	check_output_path
 	cat $data_output_path/$base_filename*_chradded.txt \
 		> $data_output_path/$base_filename"added$datafile_extension"
 	sed -i '1!{/^Marker/d}' $data_output_path/$base_filename"added$datafile_extension"
