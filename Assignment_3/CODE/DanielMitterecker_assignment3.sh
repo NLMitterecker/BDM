@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # BDM Assignment 3; Daniel Mitterecker 
 # script to add a column to datafiles and concatenate the files to one large file
-# Configure the next part to your needs
 
+# Configure the next part to your needs
+#
 # name of the additional chromosome column
 chromosome_column_header="CHR"
 # path to the input data
@@ -15,6 +16,7 @@ base_filename="SWB_Full_chr"
 datafile_extension=".txt"
 # sequence of chromosome numbers
 chromosome_list=$(seq -s ' ' 22)
+###
 
 function add_chr {
 	chromosome_number=$1
@@ -44,8 +46,8 @@ function new_data_file {
 	data_value=$2
 	awk -v columnData=$data_value -v columnName=$chromosome_column_header \
 	'BEGIN {OFS="\t"} { if ( NR == 1 ) print $1, columnName, $2, $3, $4, $5, $6, $7, $8;\
-		else print $1, columnData, $2, $3, $4, $5, $6, $7, $8 }'\
-		$data_file
+	else print $1, columnData, $2, $3, $4, $5, $6, $7, $8 }'\
+	$data_file
 }
 
 function check_output_path {
