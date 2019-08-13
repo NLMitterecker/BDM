@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # BDM Assignment 3; Daniel Mitterecker 
-# script to add a column to datafiles and concatenate the files to one large file
+# script to add a column to datafiles and 
+# concatenate the files to one large file
 
 # Configure the next part to your needs
 #
@@ -20,10 +21,6 @@ chromosome_list=$(seq -s ' ' 22)
 
 function add_chr {
 	chromosome_number=$1
-	if [ -z $chromosome_number ]; then
-		echo "No chromosome number provided. Exiting!"
-       		exit
-	fi
 	chromosome_filename=$data_input_path/$base_filename$chromosome_number$datafile_extension
 	check_datafile $chromosome_filename 
 	check_output_path
