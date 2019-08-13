@@ -64,7 +64,7 @@ function main {
 	check_output_path
 	cat $data_output_path/$base_filename*_chradded.txt \
 		> $data_output_path/$base_filename"added$datafile_extension"
-	sed -i '1!{/^Marker/d}' \
+	sed -i '1!{/^MarkerName/d}' \
 		$data_output_path/$base_filename"added$datafile_extension"
 	echo "Scipt over"
 }
