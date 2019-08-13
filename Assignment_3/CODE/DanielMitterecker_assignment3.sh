@@ -58,7 +58,7 @@ function main {
 		> $data_output_path/$base_filename"added$datafile_extension"
 	sed -i '1!{/^MarkerName/d}' \
 		$data_output_path/$base_filename"added$datafile_extension"
-	echo "Scipt over"
+	echo "Script over"
 }
 
 main
