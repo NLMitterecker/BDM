@@ -10,11 +10,7 @@ if (length(args) < 1) {
 } else {
 	inputData = args[1]
 	inputFilename = basename(inputData)
-	data = read.table(
-		file = inputData, 
-		sep = '\t', 
-		header = TRUE
-	)
+	data = tabbedDataWithHeaderToDataFrame(inputData)
 	outputFilename <- paste(inputFilename, graphics_extension, sep='.')
 	outputFilename <- paste(zplot_prefix, outputFilename, sep='_')
 	jpeg(paste(dataOutputPath, outputFilename, sep='/'))
@@ -28,4 +24,3 @@ if (length(args) < 1) {
 	)
 	garbage <- dev.off()
 }
-

@@ -7,3 +7,13 @@ yaxisLabel="Z_pval"
 plotColor="blue"
 zplot_prefix="Zplot"
 graphics_extension="jpeg"
+
+tabbedDataWithHeaderToDataFrame <- function (dataFile) {
+	return(
+		read.table(
+			file = dataFile, 
+			sep = '\t', 
+			header = TRUE
+		)
+	)
+}
