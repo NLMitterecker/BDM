@@ -12,6 +12,12 @@ if (length(args) < 1) {
 	data$Z1 <- c(data$Beta/data$SE)
 	data$Z2 <- c(qnorm(1 - data$Pval/2)*sign(data$Beta))
 	outputFile <- paste('Z1','Z2', inputFilename, sep='_')
-	write.table(data, paste(dataOutputPath, outputFile, sep='/'), row.names = FALSE, sep='\t', quote = FALSE)
+	write.table(
+		data, 
+		paste(dataOutputPath, outputFile, sep='/'), 
+		row.names = FALSE, 
+		sep='\t', 
+		quote = FALSE
+	)
 }
 
