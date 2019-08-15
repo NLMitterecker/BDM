@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -x
 filename=$1
 data_output_path="../OUTPUT"
 data_input_path="../INPUT"
@@ -34,7 +33,6 @@ else
 	${r_add_z_script} ${output_data}
 	${r_plot_script} "${data_output_path}/${z1z2_nodups_prefix}${filename}"
 	temp_file=$$.txt
-	echo ${temp_file}
 	awk -f ${awk_outliers_script} "${data_output_path}/${z1z2_nodups_prefix}${filename}" > \
 		"${data_output_path}/${temp_file}"
 	awk '{ if (NR == 1 || $12 == 0) print }' "${data_output_path}/${temp_file}" > \
@@ -45,4 +43,3 @@ else
 		rm "${data_output_path}/${temp_file}"
 	fi
 fi
-
