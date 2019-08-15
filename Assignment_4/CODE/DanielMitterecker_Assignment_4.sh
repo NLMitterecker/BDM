@@ -28,7 +28,7 @@ elif [[ $# > 1 ]]; then
 	echo "Error: You have supplied more than one file names. Please specify only one."
 	exit 1
 else 
-	echo "The script is being executed"
+	echo "The script is being executed."
 	output_data=$(remove_dups "${data_input_path}/${filename}")
 	${r_add_z_script} ${output_data}
 	${r_plot_script} "${data_output_path}/${nodups_prefix}${filename}"

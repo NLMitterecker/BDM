@@ -1,6 +1,8 @@
 # global variables for R scripts
 # in Assignment 4; Daniel Mitterecker
-dataOutputPath = '../OUTPUT'
+
+args = commandArgs(trailingOnly=TRUE)
+dataOutputPath = "../OUTPUT"
 plotMainTitle="Daniel Mittereckers Zplot"
 xaxisLabel="Z_beta_se"
 yaxisLabel="Z_pval"

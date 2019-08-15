@@ -3,7 +3,6 @@
 # dataframes; Daniel Mitterecker
 
 source("./globals.R")
-args = commandArgs(trailingOnly=TRUE)
 
 if (length(args) < 1) {
 	stop("No filename provided. Stopping!")
