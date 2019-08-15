@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 args = commandArgs(trailingOnly=TRUE)
-dataOutputPath = '../OUTPUT'
+source("./globals.R")
 
 if (length(args) < 1) {
 	stop("No filename provided. Stopping!")
@@ -20,4 +20,3 @@ if (length(args) < 1) {
 		quote = FALSE
 	)
 }
-

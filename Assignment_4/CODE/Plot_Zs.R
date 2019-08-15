@@ -1,10 +1,6 @@
 #!/usr/bin/env Rscript
 args = commandArgs(trailingOnly=TRUE)
-dataOutputPath = '../OUTPUT'
-plotMainTitle="Daniel Mittereckers Zplot"
-xaxisLabel="Z_beta_se"
-yaxisLabel="Z_pval"
-plotColor="blue"
+source("./globals.R")
 
 if (length(args) < 1) {
 	stop("No filename provided. Stopping!")
