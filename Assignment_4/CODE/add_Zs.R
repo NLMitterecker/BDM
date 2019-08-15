@@ -1,6 +1,9 @@
 #!/usr/bin/env Rscript
-args = commandArgs(trailingOnly=TRUE)
+# R script for assignment 4, reading and writing
+# dataframes; Daniel Mitterecker
+
 source("./globals.R")
+args = commandArgs(trailingOnly=TRUE)
 
 if (length(args) < 1) {
 	stop("No filename provided. Stopping!")

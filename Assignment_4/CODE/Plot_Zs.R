@@ -1,6 +1,9 @@
 #!/usr/bin/env Rscript
-args = commandArgs(trailingOnly=TRUE)
+# R script for plotting
+# Assignment 4; Daniel Mitterecker
+
 source("./globals.R")
+args = commandArgs(trailingOnly=TRUE)
 
 if (length(args) < 1) {
 	stop("No filename provided. Stopping!")
@@ -12,8 +15,8 @@ if (length(args) < 1) {
 		sep = '\t', 
 		header = TRUE
 	)
-	outputFilename <- paste(inputFilename, 'jpeg', sep='.')
-	outputFilename <- paste('Zplot', outputFilename, sep='_')
+	outputFilename <- paste(inputFilename, graphics_extension, sep='.')
+	outputFilename <- paste(zplot_prefix, outputFilename, sep='_')
 	jpeg(paste(dataOutputPath, outputFilename, sep='/'))
 	plot(
 		data$Z1, 
