@@ -14,7 +14,7 @@ function remove_dups {
 	local output_filename="${nodups_prefix}${filename}"
 	local output_data="${data_output_path}/${output_filename}"
 	duplicated_ids=$(awk '{print $1}' \
-			${input_data} | sort -k1 | uniq -D | uniq | paste -sd "|" -)
+			${input_data} | sort | uniq -D | uniq | paste -sd "|" -)
 	awk -v duplicates_regex_string=${duplicated_ids} -v OFS="\t" \
 			'$1 !~ duplicates_regex_string' ${input_data} > ${output_data}
 	echo ${output_data}
