@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -x
 filename=$1
 data_output_path="../OUTPUT"
 data_input_path="../INPUT"
@@ -7,10 +8,12 @@ r_add_z_script="./add_Zs.R"
 
 function remove_dups {
 	local input_data=$1
-	local output_filename="Nodups_$filename"
+	local output_filename="Nodups_${filename}"
 	local output_data="$data_output_path/$output_filename"
-	duplicated_ids=$(awk '{print $1}' $input_data | sort -k1 | uniq -D | uniq | paste -sd "|" -)
-	awk -v duplicates_regex_string=$duplicated_ids -v OFS="\t" '$1 !~ duplicates_regex_string' $input_data > $output_data
+	duplicated_ids=$(awk '{print $1}' \
+			$input_data | sort -k1 | uniq -D | uniq | paste -sd "|" -)
+	awk -v duplicates_regex_string=$duplicated_ids -v OFS="\t" \
+			'$1 !~ duplicates_regex_string' $input_data > $output_data
 	echo $output_data
 }
 
@@ -26,8 +29,10 @@ else
 	output_data=$(remove_dups $data_input_path/$filename)
 	$r_add_z_script $output_data
 	$r_plot_script $data_output_path/"Z1_Z2_Nodups_$filename"
-	awk 'BEGIN { OFS="\t"} { if (NR == 1) print $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, "Z_outlier"; else if ( $10/$11 > 1.1 || $11/$10 > 1.1) print $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, "1"; else print $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, "0"}' $data_output_path/"Z1_Z2_Nodups_$filename" > $data_output_path/tmp_file
-	awk '{ if (NR == 1 || $12 == 0) print}' $data_output_path/tmp_file > $data_output_path/Cleaned_Z1_Z2_Nodups_$filename
+	awk -f ./cleaning_outliers.awk \
+		$data_output_path/"Z1_Z2_Nodups_$filename" > $data_output_path/tmp_file
+	awk '{ if (NR == 1 || $12 == 0) print}' \
+		$data_output_path/tmp_file > $data_output_path/Cleaned_Z1_Z2_Nodups_$filename
 	$r_plot_script $data_output_path/Cleaned_Z1_Z2_Nodups_$filename
 fi
 

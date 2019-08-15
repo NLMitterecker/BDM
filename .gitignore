@@ -2,4 +2,5 @@ Assignment_4/OUTPUT
 Assignment_4/INPUT/*.txt
 Assignment_3/OUTPUT
 Assignment_3/INPUT/*.txt
-
+!Assignment*
+*
