@@ -7,11 +7,12 @@ r_plot_script="./Plot_Zs.R"
 r_add_z_script="./add_Zs.R"
 awk_outliers_script="./cleaning_outliers.awk "
 cleaned_nodups_prefix="Cleaned_Z1_Z2_Nodups_"
-nodups_prefix="Z1_Z2_Nodups_"
+z1z2_nodups_prefix="Z1_Z2_Nodups_"
+nodups_prefix="Nodups_"
 
 function remove_dups {
 	local input_data=$1
-	local output_filename="Nodups_${filename}"
+	local output_filename="${nodups_prefix}${filename}"
 	local output_data="${data_output_path}/${output_filename}"
 	duplicated_ids=$(awk '{print $1}' \
 			${input_data} | sort -k1 | uniq -D | uniq | paste -sd "|" -)
@@ -31,10 +32,10 @@ else
 	echo "The script is being executed."
 	output_data=$(remove_dups "${data_input_path}/${filename}")
 	${r_add_z_script} ${output_data}
-	${r_plot_script} "${data_output_path}/${nodups_prefix}${filename}"
+	${r_plot_script} "${data_output_path}/${z1z2_nodups_prefix}${filename}"
 	temp_file=$$.txt
 	echo ${temp_file}
-	awk -f ${awk_outliers_script} "${data_output_path}/${nodups_prefix}${filename}" > \
+	awk -f ${awk_outliers_script} "${data_output_path}/${z1z2_nodups_prefix}${filename}" > \
 		"${data_output_path}/${temp_file}"
 	awk '{ if (NR == 1 || $12 == 0) print }' "${data_output_path}/${temp_file}" > \
 		"${data_output_path}/${cleaned_nodups_prefix}${filename}"
