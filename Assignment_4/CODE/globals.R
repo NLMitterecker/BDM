@@ -3,7 +3,7 @@
 
 args = commandArgs(trailingOnly=TRUE)
 dataOutputPath = "../OUTPUT"
-plotMainTitle="Daniel Mittereckers Zplot"
+plotMainTitle="Daniel Mitterecker's Zplot"
 xaxisLabel="Z_beta_se"
 yaxisLabel="Z_pval"
 plotColor="blue"
