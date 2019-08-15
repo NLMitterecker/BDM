@@ -14,8 +14,8 @@ if (length(args) < 1) {
 	outputFilename <- paste(zplot_prefix, outputFilename, sep='_')
 	jpeg(paste(dataOutputPath, outputFilename, sep='/'))
 	plot(
-		abs(data$Z1), 
-		abs(data$Z2), 
+		data$Z1, 
+		data$Z2, 
 		main=plotMainTitle, 
 		xlab=xaxisLabel, 
 		ylab=yaxisLabel, 
