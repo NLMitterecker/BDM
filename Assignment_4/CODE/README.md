@@ -1,6 +1,7 @@
 # Assighnment 4
 
-Assignment 4, Daniel Mitterecker
+Assignment 4, Daniel Mitterecker.
+R scripts to create Plots from bioinformatics data. Bash script to orchestrate the execution and pre-processing.
 
 ## Usage
 Make sure that you execute the bash script within the **CODE** directory!
