@@ -1,6 +1,5 @@
-# Assighnment 4
+# Assignment 4
 
-Assignment 4, Daniel Mitterecker.
 R scripts to create Plots from bioinformatics data. Bash script to orchestrate the execution and pre-processing.
 
 ## Usage
@@ -19,3 +18,5 @@ Assignment_4/
 └── OUTPUT
     └── Generated Plots and Datafiles ... 
 ```
+
+&copy; Daniel Mitterecker
