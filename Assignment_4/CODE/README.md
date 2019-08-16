@@ -1,0 +1,6 @@
+# Assighnment 4
+
+## Usage
+Make sure that you execute the bash script within the CODE directory!
+Supply the name of the input file, which is located in INPUT (e.g. SWB_Full_v2.txt). 
+Don't forget to create the OUTPUT directory.
