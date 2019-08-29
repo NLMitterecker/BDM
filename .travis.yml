@@ -1,0 +1,12 @@
+language: R
+script:
+  - echo "Hallo Travis"
+#before_install:
+#install:
+#before_script:
+#script:
+#after_success:
+#after_failure:
+#before_deploy:
+#deploy:
+#after_deploy
